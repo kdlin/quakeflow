@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+data/bronze/*
+data/silver/*
+data/rejects/*
+data/warehouse/*
+!data/bronze/.gitkeep
+!data/silver/.gitkeep
+!data/rejects/.gitkeep
+!data/warehouse/.gitkeep
+.DS_Store
+Thumbs.db
