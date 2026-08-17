@@ -5,6 +5,7 @@ import time
 from pathlib import Path
 
 import duckdb
+import pytest
 
 from quakeflow.config import ProjectPaths
 from quakeflow.pipeline import run_pipeline
@@ -49,6 +50,17 @@ def temporary_project(tmp_path: Path) -> ProjectPaths:
     target_sql = tmp_path / "sql"
     shutil.copytree(source_sql, target_sql)
     return ProjectPaths.from_root(tmp_path)
+
+
+def test_project_paths_default_to_working_directory(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.chdir(tmp_path)
+
+    paths = ProjectPaths.from_root()
+
+    assert paths.root == tmp_path.resolve()
+    assert paths.sql == tmp_path.resolve() / "sql"
 
 
 def test_pipeline_is_idempotent_and_creates_all_layers(tmp_path: Path) -> None:

@@ -27,7 +27,7 @@ class ProjectPaths:
 
     @classmethod
     def from_root(cls, root: Path | str | None = None) -> ProjectPaths:
-        project_root = Path(root).resolve() if root else Path(__file__).resolve().parents[2]
+        project_root = Path(root).resolve() if root else Path.cwd().resolve()
         data = project_root / "data"
         return cls(
             root=project_root,
